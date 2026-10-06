@@ -1,0 +1,40 @@
+[
+    {
+        "question": "What is the maximum speed of the Husky A300 robot?",
+        "expected_answer": "1.5 m/s with no payload"
+    },
+    {
+        "question": "What is the maximum curb height the Husky A300 can climb?",
+        "expected_answer": "150 mm"
+    },
+    {
+    "question": "What is the maximum speed of the Husky A300 in slow mode?",
+    "expected_answer": "0.3 m/s"
+},{
+    "question": "How often should the Husky A300 tire pressure be checked?",
+    "expected_answer": "monthly"
+},
+{
+    "question": "What should the user do if the Husky A300 speed is momentarily incorrect after power up?",
+    "expected_answer": "No user intervention is required"
+},{
+    "question": "What is the maximum speed of the Husky A300 in fast mode?",
+    "expected_answer": "2.0 m/s"
+},
+{
+    "question": "What is the maximum speed when approaching the maximum curb height of 150 mm?",
+    "expected_answer": "0.1 m/s"
+},
+{
+    "question": "What operating system does the Husky A300 computer run?",
+    "expected_answer": "Ubuntu"
+},
+{
+    "question": "Does the Husky A300 have a suspension system?",
+    "expected_answer": "does not have a suspension system"
+},
+{
+    "question": "What is the maximum speed when manually pushing the Husky A300?",
+    "expected_answer": "2 m/s"
+}
+]
