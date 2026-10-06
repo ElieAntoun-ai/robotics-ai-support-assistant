@@ -38,6 +38,7 @@ output_parser = StrOutputParser()
 chain = prompt | llm | output_parser
 
 
+# Generate an answer using the retrieved RAG context
 def generate_answer(question, context):
 
     answer = chain.invoke({
