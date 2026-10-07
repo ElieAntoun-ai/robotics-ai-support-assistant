@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Robotics AI Support Assistant</title>
+</head>
+
+<body>
+
+    <h1>Robotics AI Support Assistant</h1>
+
+    <input
+        type="text"
+        id="question"
+        placeholder="Ask a robotics question..."
+    >
+
+    <button onclick="askQuestion()">Ask</button>
+
+    <div id="answer"></div>
+    <script>
+    async function askQuestion() {
+
+        const question = document.getElementById("question").value;
+
+        document.getElementById("answer").innerText = "Thinking...";
+
+        const response = await fetch("/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: question
+            })
+        });
+
+        const data = await response.json();
+
+        document.getElementById("answer").innerText = data.answer;
+    }
+</script>
+
+</body>
+
+</html>

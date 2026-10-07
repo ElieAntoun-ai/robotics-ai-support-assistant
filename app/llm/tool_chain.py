@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.messages import ToolMessage
+from langchain_core.messages import ToolMessage, SystemMessage
 from app.tools.robot_tools import get_robot_status
 from app.tools.documentation_tools import search_documentation
 
@@ -11,7 +11,7 @@ load_dotenv()
 
 # Create Gemini LLM
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.8-flash",
+    model="gemini-3.5-flash-lite",
     temperature=0
 )
 
@@ -45,10 +45,23 @@ def execute_tool(tool_call):
 
 def generate_tool_response(question):
 
-    # Store the full conversation history
     messages = [
-        ("user", question)
-    ]
+    SystemMessage(
+     content="""
+You are a robotics technical support assistant.
+
+Use the available tools to answer the user's question.
+
+When you use the search_documentation tool:
+- Answer using the retrieved documentation.
+- Always include the source file and page number at the end of the answer.
+- Do not invent a source or page number.
+
+Do not invent information that is not provided by the tools.
+"""
+    ),
+    ("user", question)
+]
 
     # First Gemini call
     response = llm_with_tools.invoke(messages)
@@ -81,5 +94,5 @@ def generate_tool_response(question):
 
     # When Gemini no longer requests a tool,
     # return its final natural-language answer
-    return response.content
+    return response.text
 
