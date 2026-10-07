@@ -3,43 +3,128 @@
 
 <head>
     <title>Robotics AI Support Assistant</title>
+
+    <style>
+
+        /* Style the entire page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+
+        /* Main application container */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* Main title */
+        h1 {
+            margin-top: 0;
+        }
+
+
+        /* Question input */
+        #question {
+            width: 75%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            outline: none;
+        }
+
+
+        /* Ask button */
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        /* Change button color when hovering */
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <h1>Robotics AI Support Assistant</h1>
+    <div class="container">
 
-    <input
-        type="text"
-        id="question"
-        placeholder="Ask a robotics question..."
-    >
+        <h1>Robotics AI Support Assistant</h1>
 
-    <button onclick="askQuestion()">Ask</button>
+        <input
+            type="text"
+            id="question"
+            placeholder="Ask a robotics question..."
+        >
 
-    <div id="answer"></div>
-    <script>
-    async function askQuestion() {
+        <button onclick="askQuestion()">Ask</button>
 
-        const question = document.getElementById("question").value;
+        <div id="answer"></div>
 
-        document.getElementById("answer").innerText = "Thinking...";
 
-        const response = await fetch("/ask", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                question: question
-            })
-        });
+        <script>
 
-        const data = await response.json();
+            async function askQuestion() {
 
-        document.getElementById("answer").innerText = data.answer;
-    }
-</script>
+                // Get the question entered by the user
+                const question =
+                    document.getElementById("question").value;
+
+
+                // Show processing message
+                document.getElementById("answer").innerText =
+                    "Thinking...";
+
+
+                // Send question to FastAPI
+                const response = await fetch("/ask", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        question: question
+                    })
+
+                });
+
+
+                // Convert API response to JSON
+                const data = await response.json();
+
+
+                // Display the answer
+                document.getElementById("answer").innerText =
+                    data.answer;
+
+            }
+
+        </script>
+
+    </div>
 
 </body>
 
