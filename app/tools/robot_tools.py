@@ -4,7 +4,8 @@ from langchain_core.tools import tool
 @tool
 def get_robot_status(robot_id: str):
     """
-    Get the current operational status of a robot using its robot ID.
+    Retrieve current operational data for a specific robot,
+    including battery level, operating status, and error code.
     """
 
     connection = sqlite3.connect(
@@ -14,12 +15,24 @@ def get_robot_status(robot_id: str):
     cursor = connection.cursor()
 
     cursor.execute(
-    "SELECT * FROM robots WHERE robot_id = ?",
-    (robot_id,)
-)
-    result = cursor.fetchone()
-    connection.close()
-    return result
+        "SELECT * FROM robots WHERE robot_id = ?",
+        (robot_id,)
+    )
 
+    result = cursor.fetchone()
+
+    connection.close()
+
+    if result is None:
+        return {
+            "error": f"Robot {robot_id} not found"
+        }
+
+    return {
+        "robot_id": result[0],
+        "battery_level": result[1],
+        "status": result[2],
+        "error_code": result[3]
+    }
 
 

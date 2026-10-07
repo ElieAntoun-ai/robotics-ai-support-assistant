@@ -1,6 +1,6 @@
 import json
 from app.rag.retriever import retrieve_documents, vector_store
-from app.llm.chain import generate_answer
+
 
 
 with open("evaluation/questions.json", "r") as file:
@@ -23,11 +23,7 @@ for test_case in test_cases:
     result.page_content for result in results
 )
 
-    generated_answer = generate_answer(
-    question,
-    context
-)
-    print("Generated answer:", generated_answer)
+
 
     retrieved_text = " ".join(
     result.page_content for result in results
