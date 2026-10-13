@@ -1,0 +1,17 @@
+# Python virtual environment
+.venv/
+
+# Environment variables and API keys
+.env
+.env.*
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Git files
+.git/
+.gitignore
+
+# Local test files
+test_gemini.py
